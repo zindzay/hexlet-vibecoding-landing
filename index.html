@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+  // Применяем сохранённую тему до отрисовки страницы, чтобы избежать мигания.
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
 <title>Ivan.java</title>
 <meta name="description" content="Личный лендинг Java-разработчика — опыт, стек и контакты в стиле исходного кода." />
 
@@ -119,6 +130,36 @@
     max-width: 920px;
     margin: 0 auto;
     padding-inline: 24px;
+  }
+
+  /* ============ theme toggle ============ */
+  .theme-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 30;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .theme-toggle svg { width: 20px; height: 20px; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  .theme-toggle.is-dark .icon-sun { display: block; }
+  .theme-toggle.is-dark .icon-moon { display: none; }
+  @media (max-width: 620px) {
+    .theme-toggle { right: 14px; bottom: 14px; width: 42px; height: 42px; }
   }
 
   /* ============ topbar ============ */
@@ -452,6 +493,16 @@
 </head>
 <body>
 
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Переключить тему" aria-pressed="false" title="Переключить тему">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+  </svg>
+</button>
+
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="#hero">Ivan<span class="dot">.</span>java</a>
@@ -682,6 +733,52 @@
         reset('не вышло');
       }
     });
+  })();
+
+  (function () {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    var media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+    function getStoredTheme() {
+      try { return localStorage.getItem('theme'); } catch (e) { return null; }
+    }
+
+    function getEffectiveTheme() {
+      var stored = getStoredTheme();
+      if (stored === 'light' || stored === 'dark') return stored;
+      return media && media.matches ? 'dark' : 'light';
+    }
+
+    function syncToggle(theme) {
+      toggle.classList.toggle('is-dark', theme === 'dark');
+      toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    }
+
+    function applyTheme(theme, persist) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (persist) {
+        try { localStorage.setItem('theme', theme); } catch (e) {}
+      }
+      syncToggle(theme);
+    }
+
+    // Синхронизируем иконку при загрузке (атрибут уже мог быть выставлен
+    // инлайн-скриптом в <head>, если пользователь выбирал тему раньше).
+    syncToggle(getEffectiveTheme());
+
+    toggle.addEventListener('click', function () {
+      var next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+    });
+
+    // Если пользователь не выбирал тему явно, следим за сменой системной темы.
+    if (media) {
+      media.addEventListener('change', function (e) {
+        if (!getStoredTheme()) syncToggle(e.matches ? 'dark' : 'light');
+      });
+    }
   })();
 </script>
 
