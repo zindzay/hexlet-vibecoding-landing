@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ivan.java</title>
+<meta name="description" content="Личный лендинг Java-разработчика — опыт, стек и контакты в стиле исходного кода." />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://zindzay.github.io/hexlet-vibecoding-landing/" />
+<meta property="og:title" content="Ivan.java — Java-разработчик" />
+<meta property="og:description" content="Backend-разработчик с 5 годами опыта: Java 21, Spring Boot, Kotlin. Опыт, стек и контакты — в одном файле." />
+<meta property="og:image" content="https://zindzay.github.io/hexlet-vibecoding-landing/og-java-developer.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ru_RU" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ivan.java — Java-разработчик" />
+<meta name="twitter:description" content="Backend-разработчик с 5 годами опыта: Java 21, Spring Boot, Kotlin. Опыт, стек и контакты — в одном файле." />
+<meta name="twitter:image" content="https://zindzay.github.io/hexlet-vibecoding-landing/og-java-developer.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ tokens (dark-first: bare :root holds the dark palette) ============ */
+  :root {
+    --bg: #15181e;
+    --surface: #1d212a;
+    --surface-2: #262b36;
+    --border: #333a47;
+    --text: #e8e3d8;
+    --text-dim: #9aa0ad;
+    --text-faint: #656c7a;
+    --accent: #e0a052;
+    --accent-strong: #f0b262;
+    --accent-ink: #2b1c0d;
+    --rose: #d97b6c;
+    --sage: #8fae7c;
+    --shadow: 0 24px 48px -24px rgba(0,0,0,0.55);
+
+    --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f6f1e6;
+      --surface: #fffdf9;
+      --surface-2: #eee7d8;
+      --border: #ddd3bd;
+      --text: #241f18;
+      --text-dim: #5c5648;
+      --text-faint: #8a8371;
+      --accent: #a8661f;
+      --accent-strong: #8f5417;
+      --accent-ink: #fff8ee;
+      --rose: #b1503f;
+      --sage: #4f6f42;
+      --shadow: 0 24px 48px -28px rgba(60,45,20,0.25);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f6f1e6;
+    --surface: #fffdf9;
+    --surface-2: #eee7d8;
+    --border: #ddd3bd;
+    --text: #241f18;
+    --text-dim: #5c5648;
+    --text-faint: #8a8371;
+    --accent: #a8661f;
+    --accent-strong: #8f5417;
+    --accent-ink: #fff8ee;
+    --rose: #b1503f;
+    --sage: #4f6f42;
+    --shadow: 0 24px 48px -28px rgba(60,45,20,0.25);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #15181e;
+    --surface: #1d212a;
+    --surface-2: #262b36;
+    --border: #333a47;
+    --text: #e8e3d8;
+    --text-dim: #9aa0ad;
+    --text-faint: #656c7a;
+    --accent: #e0a052;
+    --accent-strong: #f0b262;
+    --accent-ink: #2b1c0d;
+    --rose: #d97b6c;
+    --sage: #8fae7c;
+    --shadow: 0 24px 48px -24px rgba(0,0,0,0.55);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding-inline: 24px;
+  }
+
+  /* ============ topbar ============ */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 14px;
+  }
+  .brand {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .brand .dot { color: var(--accent); }
+  nav.primary-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  nav.primary-nav a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    transition: color 0.15s ease;
+  }
+  nav.primary-nav a:hover,
+  nav.primary-nav a:focus-visible { color: var(--accent); }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ============ section scaffolding ============ */
+  section { padding-block: 76px; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--sage);
+    margin: 0 0 10px;
+  }
+  .eyebrow::before { content: "// "; color: var(--text-faint); }
+
+  .section-title {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 32px;
+    max-width: 34ch;
+  }
+
+  /* ============ hero ============ */
+  .hero { padding-top: 64px; }
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .badge-build {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--sage);
+    background: color-mix(in srgb, var(--sage) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--sage) 35%, transparent);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .badge-build .build-time { color: var(--text-faint); }
+
+  .editor-window {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+  }
+  .editor-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot-red { background: #e0685c; }
+  .dot-yellow { background: #e0b354; }
+  .dot-green { background: #7fb56b; }
+  .editor-tab {
+    margin-left: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+  .editor-body {
+    padding: 22px 24px;
+    overflow-x: auto;
+  }
+  pre.code {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 0.78rem + 0.4vw, 1.05rem);
+    line-height: 1.75;
+    white-space: pre;
+  }
+  .c-kw { color: var(--rose); }
+  .c-class { color: var(--accent); font-weight: 600; }
+  .c-comment { color: var(--text-faint); }
+  .cursor {
+    color: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-lede {
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+    color: var(--text-dim);
+    max-width: 56ch;
+    margin: 0 0 28px;
+  }
+  .hero-lede strong { color: var(--text); font-weight: 600; }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-ghost { border-color: var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ============ about ============ */
+  .javadoc-fence {
+    font-family: var(--font-mono);
+    color: var(--text-faint);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  .about-body { max-width: 62ch; }
+  .about-body p { margin: 0 0 16px; color: var(--text-dim); }
+  .about-body p:last-child { margin-bottom: 0; }
+  .about-body strong { color: var(--text); font-weight: 600; }
+
+  /* ============ skills ============ */
+  .stack-frame {
+    font-family: var(--font-mono);
+    color: var(--text-faint);
+    font-size: 0.85rem;
+  }
+  .stack-frame.close { margin-top: 8px; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-block: 20px;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+  }
+  .skill-card h3 {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .skill-card h3 .type { color: var(--text-faint); }
+  .tag-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-list li {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 5px;
+  }
+
+  /* ============ experience ============ */
+  .trace { display: flex; flex-direction: column; gap: 26px; }
+  .trace-frame { position: relative; padding-left: 26px; }
+  .trace-frame::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 14px;
+    height: 1px;
+    background: var(--border);
+  }
+  .frame-at {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .frame-at .role { color: var(--accent); }
+  .frame-at .period { color: var(--text-faint); font-size: 0.85rem; }
+  .trace-frame p { margin: 0; color: var(--text-dim); max-width: 58ch; }
+  .caused-by {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-faint);
+    padding-left: 26px;
+  }
+  .caused-by .highlight { color: var(--sage); }
+
+  /* ============ projects ============ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .project-card .repo-name {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .project-card .repo-name .slash { color: var(--text-faint); font-weight: 400; }
+  .project-card p { margin: 0; color: var(--text-dim); font-size: 0.94rem; }
+  .project-card .tag-list li { font-size: 0.76rem; }
+
+  /* ============ contact ============ */
+  .contact-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 28px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+  .contact-block .sig { color: var(--text); margin: 0 0 4px; }
+  .contact-block .sig .kw { color: var(--rose); }
+  .contact-block .sig .cls { color: var(--accent); }
+  .contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 0 10px 22px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .contact-row:last-of-type { border-bottom: none; }
+  .contact-row .case { color: var(--text-faint); white-space: nowrap; }
+  .contact-row a, .contact-row .value {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--border);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+  }
+  .contact-row a:hover { color: var(--accent); border-color: var(--accent); }
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .closing-brace { color: var(--text-faint); margin: 14px 0 0 0; }
+
+  /* ============ footer ============ */
+  footer { padding: 40px 0 56px; }
+  footer .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  footer p { margin: 0; color: var(--text-faint); font-size: 0.85rem; }
+  footer .comment { font-family: var(--font-mono); }
+
+  @media (max-width: 620px) {
+    nav.primary-nav ul { gap: 14px; }
+    nav.primary-nav a { font-size: 0.78rem; }
+    section { padding-block: 56px; }
+    .editor-body { padding: 18px; }
+    .contact-row { padding-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#hero">Ivan<span class="dot">.</span>java</a>
+    <nav class="primary-nav" aria-label="Основная навигация">
+      <ul>
+        <li><a href="#about">Обо мне</a></li>
+        <li><a href="#skills">Стек</a></li>
+        <li><a href="#experience">Опыт</a></li>
+        <li><a href="#projects">Проекты</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="hero" class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <span class="badge-build">✓ BUILD SUCCESSFUL <span class="build-time">4.7s</span></span>
+      </div>
+
+      <div class="editor-window">
+        <div class="editor-titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="editor-tab">Ivan.java</span>
+        </div>
+        <div class="editor-body">
+<pre class="code"><code><span class="c-kw">package</span> career;
+
+<span class="c-kw">public</span> <span class="c-kw">class</span> <span class="c-class">IvanPetrov</span> <span class="c-kw">implements</span> <span class="c-class">JavaDeveloper</span> {
+
+    <span class="c-comment">// Backend-разработчик · 5 лет в проде</span>
+    <span class="c-comment">// Java 21 · Spring Boot · Kotlin · PostgreSQL</span>
+
+}<span class="cursor" aria-hidden="true">▌</span></code></pre>
+        </div>
+      </div>
+
+      <p class="hero-lede">Проектирую сервисы, которые <strong>не падают по ночам</strong>: чистая архитектура, осознанные абстракции и покрытие тестами, на которое можно положиться.</p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Связаться</a>
+        <a href="#projects" class="btn btn-ghost">Смотреть проекты</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow">about</p>
+      <pre class="javadoc-fence">/**</pre>
+      <div class="about-body">
+        <p>Пишу на Java <strong>7 лет</strong>, из них 5 — в проде на позициях от джуна до senior. Специализируюсь на бэкенде: проектирование доменной модели, интеграции между сервисами и всё, что происходит, когда нагрузка перестаёт быть гипотетической.</p>
+        <p>Предпочитаю скучный, предсказуемый код красивому. Считаю, что <strong>хороший тест — часть архитектуры</strong>, а не проверка после факта, и что миграцию схемы БД можно откатить так же спокойно, как накатить.</p>
+      </div>
+      <pre class="javadoc-fence"> */</pre>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <p class="eyebrow">tech-stack</p>
+      <pre class="stack-frame">class TechStack {</pre>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3><span class="type">Set&lt;String&gt;</span> languages</h3>
+          <ul class="tag-list">
+            <li>Java 21</li>
+            <li>Kotlin</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3><span class="type">Set&lt;String&gt;</span> frameworks</h3>
+          <ul class="tag-list">
+            <li>Spring Boot</li>
+            <li>Spring Security</li>
+            <li>Hibernate / JPA</li>
+            <li>JUnit 5 · Mockito</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3><span class="type">Set&lt;String&gt;</span> infrastructure</h3>
+          <ul class="tag-list">
+            <li>PostgreSQL</li>
+            <li>Kafka</li>
+            <li>Redis</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3><span class="type">Set&lt;String&gt;</span> practices</h3>
+          <ul class="tag-list">
+            <li>REST / gRPC</li>
+            <li>CI/CD</li>
+            <li>Code review</li>
+            <li>Мониторинг</li>
+          </ul>
+        </div>
+      </div>
+
+      <pre class="stack-frame close">}</pre>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <p class="eyebrow">stack-trace — свежее сверху</p>
+
+      <div class="trace">
+        <div class="trace-frame">
+          <p class="frame-at">at <span class="role">FinTechCore.SeniorJavaDeveloper</span>(<span class="period">2023 — сейчас</span>)</p>
+          <p>Веду проектирование платёжного бэкенда: разбил монолит на 6 сервисов, ввёл событийную модель на Kafka, снизил p95 обработки транзакций с 800 мс до 140 мс.</p>
+        </div>
+        <div class="trace-frame">
+          <p class="frame-at">at <span class="role">RetailStart.JavaDeveloper</span>(<span class="period">2021 — 2023</span>)</p>
+          <p>Разрабатывал API каталога и заказов на Spring Boot, настроил интеграционные тесты и CI, что сократило количество регрессий в проде втрое.</p>
+        </div>
+        <div class="trace-frame">
+          <p class="frame-at">at <span class="role">DevAgency.JuniorDeveloper</span>(<span class="period">2019 — 2021</span>)</p>
+          <p>Поддерживал внутренние сервисы на Java 8/11, разбирался в легаси-коде и учился не бояться чужих stack trace.</p>
+        </div>
+      </div>
+
+      <p class="caused-by">Caused by: <span class="highlight">Passion</span>.forCode(University.java:1)</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <p class="eyebrow">$ ls -la ./projects</p>
+      <h2 class="section-title">Что делал руками</h2>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <p class="repo-name"><span class="slash">payments/</span>ledger-service</p>
+          <p>Сервис двойной записи для платёжной системы: идемпотентные операции, event sourcing, 99.98% аптайма за год.</p>
+          <ul class="tag-list">
+            <li>Spring Boot</li>
+            <li>Kafka</li>
+            <li>PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="project-card">
+          <p class="repo-name"><span class="slash">retail/</span>catalog-api</p>
+          <p>REST API каталога товаров с поиском и фасетной фильтрацией, выдерживает 3000 RPS на пиках распродаж.</p>
+          <ul class="tag-list">
+            <li>Java 17</li>
+            <li>Elasticsearch</li>
+            <li>Redis</li>
+          </ul>
+        </div>
+        <div class="project-card">
+          <p class="repo-name"><span class="slash">internal/</span>ci-pipeline-kit</p>
+          <p>Набор переиспользуемых шаблонов CI/CD для команды: сборка, тесты, деплой — из коробки для новых сервисов.</p>
+          <ul class="tag-list">
+            <li>Docker</li>
+            <li>GitHub Actions</li>
+            <li>Gradle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <p class="eyebrow">contact-me</p>
+      <h2 class="section-title">Готов обсудить задачу</h2>
+
+      <div class="contact-block">
+        <p class="sig"><span class="kw">public</span> Response <span class="cls">contactMe</span>(Channel channel) {</p>
+
+        <div class="contact-row">
+          <span class="case">case EMAIL →</span>
+          <a href="mailto:ivan.petrov@example.com">ivan.petrov@example.com</a>
+          <button class="copy-btn" type="button" data-copy="ivan.petrov@example.com">скопировать</button>
+        </div>
+        <div class="contact-row">
+          <span class="case">case TELEGRAM →</span>
+          <span class="value">@ivan_dev</span>
+        </div>
+        <div class="contact-row">
+          <span class="case">case GITHUB →</span>
+          <span class="value">github.com/ivanpetrov</span>
+        </div>
+        <div class="contact-row">
+          <span class="case">case LINKEDIN →</span>
+          <span class="value">linkedin.com/in/ivanpetrov</span>
+        </div>
+
+        <p class="closing-brace">}</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Иван Петров · Собран на энтузиазме и кофе.</p>
+    <p class="comment">// public static void main(String[] args) { greet(); }</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.querySelector('.copy-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      var reset = function (label) {
+        setTimeout(function () { btn.textContent = 'скопировать'; }, 1600);
+        btn.textContent = label;
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          reset('скопировано ✓');
+        }).catch(function () {
+          reset('не вышло');
+        });
+      } else {
+        reset('не вышло');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
