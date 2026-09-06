@@ -337,9 +337,6 @@
   .about-body p:last-child { margin-bottom: 0; }
   .about-body strong { color: var(--text); font-weight: 600; }
 
-  .feedback-form { max-width: 650px; margin-top: 28px; }
-  .feedback-form iframe { display: block; width: 100%; max-width: 100%; }
-
   /* ============ skills ============ */
   .stack-frame {
     font-family: var(--font-mono);
@@ -475,6 +472,17 @@
   .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
   .closing-brace { color: var(--text-faint); margin: 14px 0 0 0; }
 
+  .contact-comment {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-faint);
+    margin: 18px 0 0;
+    padding-left: 22px;
+  }
+  .feedback-window { margin-top: 14px; }
+  .feedback-body { padding: 20px 22px 4px; }
+  .feedback-body iframe { display: block; width: 100%; max-width: 100%; border: 0; }
+
   /* ============ footer ============ */
   footer { padding: 40px 0 56px; }
   footer .wrap {
@@ -566,10 +574,6 @@
         <p>Предпочитаю скучный, предсказуемый код красивому. Считаю, что <strong>хороший тест — часть архитектуры</strong>, а не проверка после факта, и что миграцию схемы БД можно откатить так же спокойно, как накатить.</p>
       </div>
       <pre class="javadoc-fence"> */</pre>
-
-      <div class="feedback-form">
-        <script src="https://forms.yandex.ru/_static/embed.js"></script><iframe src="https://forms.yandex.ru/u/6a9d004b49af47b63c89b407?iframe=1" frameborder="0" name="ya-form-6a9d004b49af47b63c89b407" width="650"></iframe>
-      </div>
     </div>
   </section>
 
@@ -707,6 +711,20 @@
         </div>
 
         <p class="closing-brace">}</p>
+      </div>
+
+      <p class="contact-comment">// или заполните форму — отвечу в течение дня</p>
+
+      <div class="feedback-window editor-window">
+        <div class="editor-titlebar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="editor-tab">Feedback.form</span>
+        </div>
+        <div class="feedback-body">
+          <script src="https://forms.yandex.ru/_static/embed.js"></script><iframe src="https://forms.yandex.ru/u/6a9d004b49af47b63c89b407?iframe=1" frameborder="0" name="ya-form-6a9d004b49af47b63c89b407" width="650"></iframe>
+        </div>
       </div>
     </div>
   </section>
